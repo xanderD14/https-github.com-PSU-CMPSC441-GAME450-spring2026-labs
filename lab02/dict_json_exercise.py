@@ -83,24 +83,28 @@ print(f"Armor: {armor}")
 # Expected output: 25
 def get_player_intelligence(data):
     """Return the player's intelligence stat."""
-    # YOUR CODE HERE
-    pass
+    player_intelligence = data["player"]["stats"]["intelligence"]
+    print(player_intelligence)
+    return player_intelligence
+    
 
 
 # TODO Task 2: Get the total number of health potions
 # Expected output: 3
 def get_health_potion_count(data):
     """Return the quantity of health potions in inventory."""
-    # YOUR CODE HERE
-    pass
+    Amount_of_HealthPotions = data ["inventory"]["potions"]["Health Potion"]
+    print(Amount_of_HealthPotions)
+    return Amount_of_HealthPotions
+    
 
 
 # TODO Task 3: Get a list of all active quest titles
 # Expected output: ["Defeat the Dragon", "Find the Lost Tome"]
 def get_active_quest_titles(data):
     """Return a list of titles from active quests."""
-    # YOUR CODE HERE
-    pass
+    return data ["quests"][101][102]
+    
 
 
 # TODO Task 4: Calculate total damage from all weapons
@@ -108,7 +112,10 @@ def get_active_quest_titles(data):
 def calculate_total_weapon_damage(data):
     """Return the sum of damage from all weapons."""
     # YOUR CODE HERE
-    pass
+    total_damage = 0
+    for weapon in data["inventory"]["weapons"]:
+        total_damage += weapon["damage"]
+    return total_damage
 
 
 # TODO Task 5: Add a new potion to the inventory
@@ -116,7 +123,8 @@ def calculate_total_weapon_damage(data):
 def add_potion(data, potion):
     """Add a new potion dictionary to the inventory's potions list."""
     # YOUR CODE HERE
-    pass
+    data["inventory"]["potions"].append(potion)
+    return data
 
 
 # TODO Task 6: Update the player's gold after completing a quest
@@ -126,9 +134,11 @@ def complete_quest_and_get_reward(data, quest_id):
     Find the quest with the given id, add its reward to player's gold,
     and return the new gold total.
     """
-    # YOUR CODE HERE
-    pass
-
+    for quest in data["quests"]:
+        if quest["id"] == quest_id:
+            data["inventory"]["gold"] += quest["reward"]
+            return data["inventory"]["gold"]
+    
 
 # ============================================================================
 # PART 4: JSON Conversion
@@ -148,8 +158,8 @@ print(f"\nParsed back - Player name: {parsed_data['player']['name']}")
 # a "pretty" JSON string with 4-space indentation
 def to_pretty_json(data):
     """Convert a dictionary to a pretty-printed JSON string with 4-space indent."""
-    # YOUR CODE HERE
-    pass
+    
+    return json.dumps(data, indent=4)
 
 
 # ============================================================================
