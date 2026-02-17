@@ -29,7 +29,7 @@
             },
             "dc": {
               "type": "integer",
-              "description": "The Difficulty Class (DC) threshold the roll must meet or beat to succeed"
+              "description": "The Difficulty Class (DC) threshold the roll must meet or be better than to succeed"
             },
             "player": {
               "type": "string",

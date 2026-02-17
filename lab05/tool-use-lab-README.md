@@ -22,7 +22,7 @@ Tools Called:
 
 ## Lab Task 2
 
-In `lab05-tool-use.md`, describe (~250 words) an imaginative but realistic use of tool calling with language models. This is worth 30% of the lab grade. Most imaginative use cases are invited, but if you have a hard time coming up with something think of an imaginative addition that you could to your class project with tool use.
+In `lab05-tool-use.md`,
 
 ### Rubric
 - **Creativity (10%)**: The idea is original and goes beyond trivial examples (e.g., not just "get the weather").
