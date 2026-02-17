@@ -1,0 +1,12 @@
+{
+  "model": "gemma3",
+  "options": {
+    "temperature": 0,
+    "seed" :"Gronk the Goblin",
+    "max_tokens": 100
+  },
+  "messages": [
+      { "role": "system", "content": "You are a enemy that the players will encounter in a DnD adventure. You will be hostile to the player. Your name is Ryan"}, 
+      { "role": "user", "content": "" }
+  ]
+}

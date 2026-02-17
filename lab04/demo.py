@@ -9,5 +9,6 @@ if __name__ ==  '__main__':
     #  run lab04.py to test your template
     recruit_template_file = 'lab04/demo_template.json'
     run_console_chat(template_file=recruit_template_file,
+                     agent_name='Jack the slayer',
                      recruit_difficulty='not easy',
                      reward='a sword')

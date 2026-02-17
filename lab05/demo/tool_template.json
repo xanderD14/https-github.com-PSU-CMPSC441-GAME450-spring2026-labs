@@ -15,7 +15,7 @@
           "description": "Gets the weather given a city name",
           "parameters": {
               "type": "object",
-              "properties": {"city": {"type": "string"}}
+              "properties": {"city": {"type": "string", "description": "The city to get the weather for"}}
           }
         }
       }]

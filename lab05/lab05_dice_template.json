@@ -4,7 +4,41 @@
     "temperature": 0,
     "seed": "Pulin Agrawal"
   },
-  "messages": [{"role": "system", "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Greet the player and start the adventure. Take the user on an interesting and adventurous DnD journey. You will decide what activities need a skill check. You may not need to do skill checks for trivial things that a player may want to do, but the player may ask for a skill check. You will use 'roll_for' function to check if the user passes a skill check. Do not ask the player to roll anything. You may ask for skills that the player want to use. Calling the 'roll_for' function allows you to simulate dice roll. Only use tools if a skill check is needed. "}
-    ,{"role": "assistant", "content": ""}
+  "messages": [
+    {
+      "role": "system",
+      "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Greet the player and start the adventure. Take the user on an interesting and adventurous DnD journey. You will decide what activities need a skill check. You may not need to do skill checks for trivial things that a player may want to do, but the player may ask for a skill check. You will use 'roll_for' function to check if the user passes a skill check. Do not ask the player to roll anything. You may ask for skills that the player want to use. Calling the 'roll_for' function allows you to simulate dice roll. Only use tools if a skill check is needed. "
+    },
+    {
+      "role": "assistant",
+      "content": ""
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "roll_for",
+        "description": "Rolls a d20 dice to perform a DnD skill check for a player. Returns whether the player succeeded or failed based on the difficulty class (DC).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "skill": {
+              "type": "string",
+              "description": "The skill being checked, e.g. Athletics, Stealth, Perception, Persuasion"
+            },
+            "dc": {
+              "type": "integer",
+              "description": "The Difficulty Class (DC) threshold the roll must meet or beat to succeed"
+            },
+            "player": {
+              "type": "string",
+              "description": "The name or identifier of the player making the roll"
+            }
+          },
+          "required": ["skill", "dc", "player"]
+        }
+      }
+    }
   ]
 }
