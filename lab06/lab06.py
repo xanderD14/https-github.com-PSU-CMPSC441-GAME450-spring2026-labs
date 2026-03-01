@@ -63,72 +63,87 @@ class Encounter(BaseModel):
 def generate_character(description: str) -> CharacterSheet:
     """
     Generate a D&D character sheet from a natural language description.
-
-    Use ollama.chat() with the `format` parameter to get structured output.
-    The format parameter should be set to CharacterSheet.model_json_schema().
-
-    Steps:
-        1. Call ollama.chat() with:
-           - model: MODEL
-           - messages: a system message instructing the LLM to create a D&D
-             character, and a user message containing the description
-           - format: the JSON schema from CharacterSheet
-        2. Parse the response with CharacterSheet.model_validate_json()
-        3. Return the CharacterSheet instance
-
-    Refer to the Ollama Python API for more information:
-    https://github.com/ollama/ollama-python
-
-    Args:
-        description: A natural language description of the desired character,
-                     e.g. "A wise old elven wizard who studied at the Arcane Academy"
-
-    Returns:
-        A validated CharacterSheet instance
     """
-    pass
+    response = ollama.chat(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a D&D 5e character creator. Given a character description, "
+                    "generate a complete and creative character sheet with appropriate stats, "
+                    "a fitting name, race, class, level, ability scores (all between 1-20), "
+                    "hit points, and a brief backstory. Ensure all numeric values are within "
+                    "their valid ranges."
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"Create a D&D character sheet for: {description}",
+            },
+        ],
+        format=CharacterSheet.model_json_schema(),
+    )
+    return CharacterSheet.model_validate_json(response.message.content)
 
 
 def generate_monster(concept: str) -> MonsterStats:
     """
     Generate D&D monster stats from a concept description.
-
-    Use the same structured output pattern as generate_character,
-    but with the MonsterStats schema.
-
-    Args:
-        concept: A concept for the monster,
-                 e.g. "A fire-breathing turtle that lives in volcanic caves"
-
-    Returns:
-        A validated MonsterStats instance
     """
-    pass
+    response = ollama.chat(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a D&D 5e monster designer. Given a monster concept, generate "
+                    "complete and balanced monster stats including a creative name, monster type, "
+                    "an appropriate challenge rating (0-30), hit points, armor class (1-30), "
+                    "a list of at least 2 special abilities, and a vivid physical description."
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"Create D&D monster stats for: {concept}",
+            },
+        ],
+        format=MonsterStats.model_json_schema(),
+    )
+    return MonsterStats.model_validate_json(response.message.content)
 
 
 def generate_encounter(party_level: int, num_monsters: int, theme: str) -> Encounter:
     """
     Generate a complete D&D encounter with nested structured output.
-
-    This function demonstrates nested Pydantic models -- the Encounter model
-    contains a list of MonsterStats. The LLM must produce valid JSON for
-    the entire nested structure.
-
-    The prompt should instruct the LLM to:
-    - Create an encounter appropriate for the given party level
-    - Include the requested number of monsters
-    - Follow the given theme
-    - Set difficulty to exactly one of: Easy, Medium, Hard, or Deadly
-
-    Args:
-        party_level: The level of the player party (1-20)
-        num_monsters: How many monsters to include in the encounter
-        theme: A thematic description, e.g. "undead dungeon", "forest ambush"
-
-    Returns:
-        A validated Encounter instance
     """
-    pass
+    response = ollama.chat(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a D&D 5e encounter designer. Generate complete, balanced encounters "
+                    "with vivid settings, compelling narrative hooks, and fully detailed monster "
+                    "stat blocks. Difficulty must be exactly one of: Easy, Medium, Hard, or Deadly. "
+                    "Each monster must have a name, type, challenge rating, hit points, armor class, "
+                    "at least one special ability, and a physical description."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Create a D&D encounter with the following parameters:\n"
+                    f"- Party level: {party_level}\n"
+                    f"- Number of monsters: {num_monsters}\n"
+                    f"- Theme: {theme}\n"
+                    f"Generate exactly {num_monsters} monster(s) appropriate for a level {party_level} party."
+                ),
+            },
+        ],
+        format=Encounter.model_json_schema(),
+    )
+    return Encounter.model_validate_json(response.message.content)
 
 
 # ============================================================================
