@@ -11,7 +11,7 @@ from typing import List, Dict, Any
 
 # Vector database, embedding, and text processing
 import chromadb
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 import ollama
