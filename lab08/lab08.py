@@ -11,7 +11,7 @@ from typing import List, Dict, Any
 
 # Vector database, embedding, and text processing
 import chromadb
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 import ollama
@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 
-class OllamaEmbeddingFunction:
+class OllamaEmbeddingFunction(chromadb.EmbeddingFunction):
     """
     Custom embedding function that uses Ollama for embeddings.
     
