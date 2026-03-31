@@ -26,7 +26,7 @@ from mcp.client.stdio import stdio_client
 from langchain_mcp_adapters.tools import load_mcp_tools
 
 # LangGraph - prebuilt ReAct agent that handles the tool-calling loop
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_react_agent
 
 # Ollama LLM via LangChain
 from langchain_ollama import ChatOllama
@@ -103,7 +103,7 @@ async def main():
             # TODO: Create a LangGraph ReAct agent
             # Pass the llm, tools, and SYSTEM_PROMPT (as state_modifier) to create_react_agent.
             # The agent will automatically handle the tool-calling loop - no manual loop needed!
-            # agent = create_react_agent(llm, tools, state_modifier=SYSTEM_PROMPT)
+            # agent = create_agent(llm, tools, system_prompt=SYSTEM_PROMPT)
             agent = None  # Replace this line with the agent creation above
 
             # Interactive chat loop

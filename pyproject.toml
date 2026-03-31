@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "langchain",
-    "numpy>=2.4.2",
+    "mcp>=1.0.0",
+    "langgraph>=0.2.0",
+    "langchain-mcp-adapters>=0.0.1",
+    "langchain-ollama>=0.2.0",
+    "langchain>=1.2.0",
     "ollama>=0.6.1",
     "pandas>=3.0.0",
     "requests>=2.32.5",
