@@ -129,10 +129,6 @@ Complete `mcp_server.py` to create an MCP server with three DnD-related tools.
 3. **`calculate_damage(base_damage: int, armor_class: int, attack_roll: int) -> str`**
    - Returns a message describing damage dealt (base_damage if attack_roll >= armor_class, else 0)
 
-**Then define the tool schemas** in `list_tools()` so the MCP client can discover them. Use the demo server as a reference for the `Tool` schema format.
-
-The `call_tool` dispatcher and `TOOL_FUNCTIONS` mapping are already provided — you just need to implement the functions and schemas.
-
 **Test your server:**
 ```bash
 python mcp_server.py
