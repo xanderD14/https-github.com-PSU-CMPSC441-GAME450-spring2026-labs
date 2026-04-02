@@ -61,7 +61,7 @@ By completing this lab, you will:
 - Ollama installed with `llama3.2:latest` model
 - Python 3.10+
 
-> **Why LangGraph?** Lab 05 had you manually format tools, run a chat loop, and append tool results back into the message history. LangGraph's `create_react_agent` handles all of that for you — you just give it an LLM and a list of tools.
+> **Why LangGraph?** Lab 05 had you manually format tools, run a chat loop, and append tool results back into the message history. LangChain's `create_agent` handles all of that for you — you just give it an LLM and a list of tools.
 
 ## Setup
 
@@ -154,7 +154,7 @@ Complete `lab11.py` to:
 1. Connect to your MCP server
 2. Load MCP tools as LangChain tools using `load_mcp_tools(session)`
 3. Create a `ChatOllama` LLM instance
-4. Build a LangGraph ReAct agent with `create_react_agent(llm, tools, state_modifier=SYSTEM_PROMPT)`
+4. Build a LangChain based agent with `create_agent(llm, tools, system_prompt=SYSTEM_PROMPT)`
 5. Invoke the agent with user messages and return the final response
 
 The `load_mcp_tools` adapter handles tool format conversion automatically — no need to write `format_tools_for_ollama()` by hand. The ReAct (Reasoning and Acting) agent handles the tool-calling loop — no need to manually append tool results to the message history.
